@@ -8,7 +8,7 @@ function Layout({ children, title }) {
 
 
     return (
-        <div className="min-h-screen min-w-full flex flex-col">
+        <div className="min-h-screen min-w-full flex flex-col bg-neutral-100">
             <Head title={title}/>
             <NavBar/>
             <main>
