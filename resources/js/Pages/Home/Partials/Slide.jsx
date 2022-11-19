@@ -2,8 +2,8 @@ import React from 'react'
 import { useSwiper } from 'swiper/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from "swiper";
-import 'swiper/css';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+import 'swiper/css';
 
 function Slide() {
 

@@ -8,15 +8,15 @@ import DropDownLink from './DropDownLink';
 
 function NavUser({ className }) {
 
-    const { cart, auth, flash } = usePage().props;
+    const { cart, auth, modal } = usePage().props;
     const [showLogin, setShowLogin] = useState(false);
     const [dropDownUser, setDropDownUser] = useState(false);
 
     useEffect(() => {
-        if(flash.action === 'login'){
+        if(modal.action === 'login'){
             setShowLogin(true);
         }
-    }, [flash.action]);
+    }, [modal.action]);
 
     const logout = () => {
         Inertia.post(route('logout'));

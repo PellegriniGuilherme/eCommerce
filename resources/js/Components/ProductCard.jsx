@@ -32,7 +32,7 @@ function ProductCard() {
 
     return (
         <div
-            className="w-full min-h-[calc(100vw/2_*_1.15)] md:min-h-[calc(100vw/4_*_1.15)] rounded-md p-3 bg-zinc-50 shadow flex flex-col items-center cursor-pointer relative"
+            className="w-full min-h-[calc(100vw/2_*_0.15)] md:min-h-[calc(100vw/4_*_1.15)] p-3 flex flex-col items-center cursor-pointer relative"
             onMouseEnter={enterHover}
             onMouseLeave={leaveHover}
         >

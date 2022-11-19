@@ -12,9 +12,8 @@ function Toast() {
                 duration: 4000,
                 position: 'top-center',
             });
-            Inertia.reload({only: ['flash']})
         }
-    }, [flash]);
+    }, [flash.message]);
 
     return (
         <Toaster
