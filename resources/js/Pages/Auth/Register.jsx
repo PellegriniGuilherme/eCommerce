@@ -38,7 +38,7 @@ export default function Register() {
     const refNumero = useRef(null);
 
     const getCep = async (cep) => {
-        await axios.get(`http://viacep.com.br/ws/${cep}/json/`)
+        await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
         .then((response) => {
             if(response.data.erro){
                 setError('cep', "Não foi possível localizar o seu CEP");
