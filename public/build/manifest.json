@@ -3,13 +3,13 @@
     "file": "assets/email_art.bbaf8b5a.svg",
     "src": "resources/images/email_art.svg"
   },
-  "resources/images/logo_negative.svg": {
-    "file": "assets/logo_negative.9a609bd5.svg",
-    "src": "resources/images/logo_negative.svg"
-  },
   "resources/images/logo.svg": {
     "file": "assets/logo.3f752fe6.svg",
     "src": "resources/images/logo.svg"
+  },
+  "resources/images/logo_negative.svg": {
+    "file": "assets/logo_negative.9a609bd5.svg",
+    "src": "resources/images/logo_negative.svg"
   },
   "resources/images/login_art.svg": {
     "file": "assets/login_art.cf7561db.svg",
