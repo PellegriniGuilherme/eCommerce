@@ -68,7 +68,7 @@ function Login({showLogin, close}) {
                             <Link href={route('register')} className="text-zinc-800 text-sm font-bold">
                                 Registre-se
                             </Link>
-                            <Link className="text-zinc-800 text-sm font-bold">
+                            <Link href={route('password.request')} className="text-zinc-800 text-sm font-bold">
                                 Esqueci minha senha
                             </Link>
                         </div>

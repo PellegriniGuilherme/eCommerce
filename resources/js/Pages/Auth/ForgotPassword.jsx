@@ -1,9 +1,10 @@
 import React from 'react';
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/inertia-react';
+import Layout from '@/Layouts/Layout';
+import Status from '@/Components/Status';
+import Input from '@/Components/Forms/Input';
+import Button from '@/Components/Forms/Button';
+import { ReactComponent as Art } from '../../../images/email_art.svg';
 
 export default function ForgotPassword({ status }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -21,34 +22,36 @@ export default function ForgotPassword({ status }) {
     };
 
     return (
-        <GuestLayout>
-            <Head title="Forgot Password" />
+        <Layout>
+            <Head title="Esqueci a Senha" />
+            <section className="p-4 md:p-8 flex flex-row h-3/4">
+                <div className="w-full md:w-1/2 my-auto">
+                    <h1 className="font-bold text-xl text-center text-zinc-800 mb-10">Esqueci minha Senha</h1>
+                    <div className="mb-4 text-sm text-zinc-800">
+                        Esqueceu sua senha? Sem problemas. Basta nos informar seu endereço de e-mail e enviaremos um e-mail com um link de redefinição de senha que permitirá que você redefina sua senha.
+                    </div>
 
-            <div className="mb-4 text-sm text-gray-600">
-                Forgot your password? No problem. Just let us know your email address and we will email you a password
-                reset link that will allow you to choose a new one.
-            </div>
+                    <Status status={status}/>
 
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
-
-            <form onSubmit={submit}>
-                <TextInput
-                    type="text"
-                    name="email"
-                    value={data.email}
-                    className="mt-1 block w-full"
-                    isFocused={true}
-                    handleChange={onHandleChange}
-                />
-
-                <InputError message={errors.email} className="mt-2" />
-
-                <div className="flex items-center justify-end mt-4">
-                    <PrimaryButton className="ml-4" processing={processing}>
-                        Email Password Reset Link
-                    </PrimaryButton>
+                    <form onSubmit={submit} className="flex flex-col gap-6">
+                        <Input
+                            type="text"
+                            label="E-mail"
+                            name="email"
+                            value={data.email}
+                            autoComplete="username"
+                            handleChange={onHandleChange}
+                            error={errors.email}
+                        />
+                        <Button processing={processing}>
+                            Enviar E-mail
+                        </Button>
+                    </form>
                 </div>
-            </form>
-        </GuestLayout>
+                <div className="hidden md:flex w-1/2">
+                    <Art className="h-96 m-auto"/>
+                </div>
+            </section>
+        </Layout>
     );
 }
