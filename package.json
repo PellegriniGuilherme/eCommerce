@@ -23,7 +23,10 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
+        "react-hot-toast": "^2.4.0",
         "react-icons": "^4.6.0",
+        "react-input-mask": "^3.0.0-alpha.2",
+        "swiper": "^8.4.5",
         "vite-plugin-svgr": "^2.2.2"
     }
 }

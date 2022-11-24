@@ -65,7 +65,7 @@ function Login({showLogin, close}) {
                             }
                         />
                         <div className="flex flex-row justify-between mt-3">
-                            <Link className="text-zinc-800 text-sm font-bold">
+                            <Link href={route('register')} className="text-zinc-800 text-sm font-bold">
                                 Registre-se
                             </Link>
                             <Link className="text-zinc-800 text-sm font-bold">

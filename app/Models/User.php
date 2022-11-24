@@ -22,6 +22,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'cpf',
+        'gender',
+        'birthDate',
+        'cell'
     ];
 
     /**
@@ -32,6 +36,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'created_at',
+        'updated_at'
     ];
 
     /**
@@ -41,5 +47,11 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'birthDate' => 'date:Y-m-d'
     ];
+
+    public function address()
+    {
+        return $this->hasMany(AddressUser::class)->orderBy('default');
+    }
 }

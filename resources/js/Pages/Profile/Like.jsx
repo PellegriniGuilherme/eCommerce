@@ -16,9 +16,10 @@ export default function Edit({ user, status }) {
             <div className="p-4 md:p-8 flex flex-col gap-y-5">
                 <BreadCrumbs way={[
                     {name: 'Pagina Principal', route: 'home', active: false},
-                    {name: 'Minha Conta', route: 'profile.edit', active: true}
+                    {name: 'Minha Conta', route: 'profile.edit', active: false},
+                    {name: 'Curtidos', route: 'profile.likes', active: true}
                 ]}/>
-                <div className='flex flex-row bg-zinc-50 rounded-md border-t-2 border-b-2 border-zinc-600 justify-start items-center gap-x-5 px-5 py-2'>
+                <div className='flex flex-row bg-zinc-50 rounded-md border-t-2  border-b-2 border-zinc-600 justify-start items-center gap-x-5 px-5 py-2'>
                     <Link href={route('profile.edit')} className={`flex flex-row gap-x-2 ${route().current('profile.edit') ? 'border-b-2 border-zinc-700' : null}`}>
                         <MdPerson size={20} /> Minha Conta
                     </Link>

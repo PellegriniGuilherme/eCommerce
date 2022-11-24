@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { usePage } from '@inertiajs/inertia-react';
-import { Inertia } from '@inertiajs/inertia';
 
 function Toast() {
     const { flash } = usePage().props;

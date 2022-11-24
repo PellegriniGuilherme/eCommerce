@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\AddressUser;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
-
 class RegisteredUserController extends Controller
 {
     /**
@@ -35,15 +35,46 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:'.User::class,
+            'name' => ['required','string','max:255'],
+            'email' => ['required','string','email','max:255','unique:users,email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'cpf' => ['required', 'cpf', 'unique:users,cpf'],
+            'gender' => ['nullable', Rule::in(['M',"F","NB", "O"])],
+            'birthDate' => ['nullable', 'date'],
+            'cell' => ['required', 'min:10', 'max:11'],
+            'cep' => ['required', 'size:8'],
+            'endereco' => ['required', 'string'],
+            'bairro' => ['required', 'string'],
+            'cidade' => ['required', 'string'],
+            'numero' => ['required', 'string'],
+            'complemento' => ['nullable', 'string'],
+            'estado' => ['required', 'string'],
+            'referencia' => ['nullable', 'string'],
+            'pais' => ['required']
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'cpf' => $request->cpf,
+            'gender' => $request->gender,
+            'birthDate' => $request->birthDate,
+            'cell' => $request->cell
+        ]);
+
+        AddressUser::create([
+            'user_id' => $user->id,
+            'cep' => $request->cep,
+            'endereco' => $request->endereco,
+            'bairro' => $request->bairro,
+            'cidade' => $request->cidade,
+            'numero' => $request->numero,
+            'complemento' => $request->complemento,
+            'estado' => $request->estado,
+            'referencia' => $request->referencia,
+            'pais' => $request->pais,
+            'default' => true
         ]);
 
         event(new Registered($user));

@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useRef } from 'react';
 
 export default forwardRef(function Input(
-    { type = 'text', name, value, className, autoComplete, required, isFocused, handleChange, iconLeft, iconRight, label, error, disabled, ...props },
+    { name, value, className, autoComplete, required, isFocused, handleChange, iconLeft, iconRight, label, error, disabled, children, ...props },
     ref
 ) {
     const input = ref ? ref : useRef();
@@ -24,8 +24,7 @@ export default forwardRef(function Input(
                         <div className="ml-2">{iconLeft}</div>
                     : null
                 }
-                <input
-                    type={type}
+                <select
                     name={name}
                     value={value}
                     ref={input}
@@ -35,7 +34,9 @@ export default forwardRef(function Input(
                     onChange={(e) => handleChange(e)}
                     disabled={disabled}
                     {...props}
-                />
+                >
+                    {children}
+                </select>
                 {
                     iconRight ?
                         <div className="mr-2">{iconRight}</div>

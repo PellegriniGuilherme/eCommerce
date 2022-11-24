@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, usePage } from '@inertiajs/inertia-react'
-import { MdLogout, MdNotificationsNone, MdOutlineShoppingCart, MdPerson, MdPersonPin, MdShoppingBasket } from 'react-icons/md';
+import { MdAccountCircle, MdLogout, MdNotificationsNone, MdOutlineFavorite, MdOutlineShoppingCart, MdPerson, MdShoppingBasket } from 'react-icons/md';
 import Login from './Login';
 import DropDown from './DropDown';
 import { Inertia } from '@inertiajs/inertia';
@@ -39,21 +39,28 @@ function NavUser({ className }) {
                             onMouseEnter={() => setDropDownUser(true)}
                             onMouseLeave={() => setDropDownUser(false)}
                         >
-                            <MdPersonPin size={34} className="text-orange-500 hover:text-orange-400 transition-colors" />
+                            <MdAccountCircle size={34} className="text-orange-500 hover:text-orange-400 transition-colors" />
                             <span className="text-left text-xs mx-2 w-20">
                                 Olá<br/>
-                                {auth.user.name}
+                                {auth.user.name.split(" ")[0]}
                             </span>
                             <DropDown open={dropDownUser} close={() => setDropDownUser(false)}>
                                 <DropDownLink title="Minha Conta" icon={<MdPerson size={20} />} href={route('profile.edit')} />
                                 <DropDownLink title="Pedidos" icon={<MdShoppingBasket size={20} />} href={route('profile.edit')} />
+                                <DropDownLink title="Curtidos" icon={<MdOutlineFavorite size={20} />} href={route('profile.edit')} />
                                 <DropDownLink title="Sair" icon={<MdLogout size={20} />} onClick={logout} link={false}/>
                             </DropDown>
                         </div>
                     :
-                        <Link href={route('login')}>
-                            <MdPersonPin size={34} className="text-zinc-800 hover:text-zinc-500 transition-colors" />
-                        </Link>
+                        <>
+                            <Link href={route('login')} className="flex flex-row">
+                                <MdAccountCircle size={34} className="text-zinc-800 hover:text-zinc-500 transition-colors" />
+                                <span className="text-left text-xs mx-2 w-20">
+                                    Olá visitante,<br/>
+                                    <b>Logue</b> aqui!
+                                </span>
+                            </Link>
+                        </>
                 }
             </div>
             {

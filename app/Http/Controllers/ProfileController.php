@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\AddressUser;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 
 class ProfileController extends Controller
@@ -19,9 +20,28 @@ class ProfileController extends Controller
      */
     public function edit(Request $request)
     {
+        $user = User::where('id', auth()->user()->id)->with('address')->first();
         return Inertia::render('Profile/Edit', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-            'status' => session('status'),
+            'user' => $user,
+            'status' => session('status')
+        ]);
+    }
+
+    public function order(Request $request)
+    {
+        $user = User::where('id', auth()->user()->id)->with('address')->first();
+        return Inertia::render('Profile/Order', [
+            'user' => $user,
+            'status' => session('status')
+        ]);
+    }
+
+    public function like(Request $request)
+    {
+        $user = User::where('id', auth()->user()->id)->with('address')->first();
+        return Inertia::render('Profile/Like', [
+            'user' => $user,
+            'status' => session('status')
         ]);
     }
 
@@ -31,41 +51,74 @@ class ProfileController extends Controller
      * @param  \App\Http\Requests\ProfileUpdateRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(ProfileUpdateRequest $request)
+    public function update(Request $request)
     {
-        $request->user()->fill($request->validated());
+        $user = User::find($request->user()->id);
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        session()->flash('message', 'Usuario atualizado com sucesso.');
-        return Redirect::route('profile.edit');
-    }
-
-    /**
-     * Delete the user's account.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroy(Request $request)
-    {
         $request->validate([
-            'password' => ['required', 'current-password'],
+            'email' => ['email', 'max:255', Rule::unique(User::class, 'email')->ignore($user->id)],
+            'password_old' => ['nullable', 'required_with:password_new', 'current_password'],
+            'password_new' => ['nullable', 'required_with:password_old', 'confirmed', Password::defaults()]
         ]);
 
-        $user = $request->user();
+        $user->email = $request->email ? $request->email : $user->email;
+        $user->password = $request->password_new ? Hash::make($request->password_new) : $user->password;
 
-        Auth::logout();
+        if($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
+        $user->save();
 
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+        return redirect()->route('profile.edit')->with('status', 'Usuario atualizado com sucesso.');
     }
+
+    public function update_address(Request $request, AddressUser $address_user)
+    {
+        $request->validate([
+            'cep' => ['nullable', 'size:8'],
+            'endereco' => ['nullable', 'string'],
+            'bairro' => ['nullable', 'string'],
+            'cidade' => ['nullable', 'string'],
+            'numero' => ['nullable', 'string'],
+            'complemento' => ['nullable', 'string'],
+            'estado' => ['nullable', 'string'],
+            'referencia' => ['nullable', 'string'],
+            'pais' => ['nullable']
+        ]);
+
+        $address_user->cep = $request->cep ? $request->cep : $address_user->cep;
+        $address_user->endereco = $request->endereco ? $request->endereco : $address_user->endereco;
+        $address_user->bairro = $request->bairro ? $request->bairro : $address_user->bairro;
+        $address_user->cidade = $request->cidade ? $request->cidade : $address_user->cidade;
+        $address_user->numero = $request->numero ? $request->numero : $address_user->numero;
+        $address_user->complemento = $request->complemento ? $request->complemento : $address_user->complemento;
+        $address_user->estado = $request->estado ? $request->estado : $address_user->estado;
+        $address_user->referencia = $request->referencia ? $request->referencia : $address_user->referencia;
+        $address_user->pais = $request->pais ? $request->pais : $address_user->pais;
+
+        $address_user->save();
+
+        return redirect()->route('profile.edit')->with('status', 'Endereço atualizado com sucesso.');
+    }
+
+    public function update_personal(Request $request)
+    {
+        $user = User::find($request->user()->id);
+
+        $request->validate([
+            'cpf' => ['nullable', 'cpf', Rule::unique(User::class, 'cpf')->ignore($user->id)],
+            'gender' => ['nullable', Rule::in(['M',"F","NB", "O"])],
+            'birthDate' => ['nullable', 'date'],
+            'cell' => ['nullable', 'min:10', 'max:11']
+        ]);
+
+        $user->cpf = $request->cpf ? $request->cpf : $user->cpf;
+        $user->gender = $request->gender ? $request->gender : $user->gender;
+        $user->birthDate = $request->birthDate ? $request->birthDate : $user->birthDate;
+        $user->cell = $request->cell ? $request->cell : $user->cell;
+        $user->save();
+
+        return redirect()->route('profile.edit')->with('status', 'Usuario atualizado com sucesso.');
+    }
+
 }
