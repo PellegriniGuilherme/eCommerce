@@ -1,5 +1,5 @@
 import React from 'react';
-import { Head, useForm } from '@inertiajs/inertia-react';
+import { Head, Link, useForm } from '@inertiajs/inertia-react';
 import Layout from '@/Layouts/Layout';
 import Status from '@/Components/Status';
 import Input from '@/Components/Forms/Input';
@@ -44,8 +44,9 @@ export default function ForgotPassword({ status }) {
                             error={errors.email}
                         />
                         <Button processing={processing}>
-                            Enviar E-mail
+                            Enviar e-mail
                         </Button>
+                        <Link href={route('login')} className="ml-auto text-zinc-800 font-bold">Lembrei minha senha</Link>
                     </form>
                 </div>
                 <div className="hidden md:flex w-1/2">

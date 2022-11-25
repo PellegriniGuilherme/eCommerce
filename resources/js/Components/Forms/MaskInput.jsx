@@ -1,5 +1,5 @@
 import React, { forwardRef, useEffect, useRef } from 'react';
-import ReactInputMask from 'react-input-mask';
+import InputMask from "react-input-mask";
 
 
 export default forwardRef(function MaskInput(
@@ -26,17 +26,16 @@ export default forwardRef(function MaskInput(
                         <div className="ml-2">{iconLeft}</div>
                     : null
                 }
-                <ReactInputMask
+                <InputMask
                     type={type}
                     name={name}
                     value={value}
-                    inputRef={input}
+                    ref={input}
                     className={`bg-transparent border-0 focus:border-0 focus:ring-0 w-full`}
-                    autoComplete={autoComplete}
                     required={required}
                     onChange={(e) => handleChange(e)}
                     disabled={disabled}
-                    maskChar={null}
+                    maskPlaceholder={null}
                     {...props}
                 />
                 {

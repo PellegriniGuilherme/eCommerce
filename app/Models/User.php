@@ -28,6 +28,8 @@ class User extends Authenticatable
         'cell'
     ];
 
+    protected $appends = ['admin'];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -49,6 +51,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'birthDate' => 'date:Y-m-d'
     ];
+
+    public function getAdminAttribute() {
+        return $this->hasRole('admin');
+    }
 
     public function address()
     {

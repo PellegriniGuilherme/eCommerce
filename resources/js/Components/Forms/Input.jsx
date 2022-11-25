@@ -30,7 +30,6 @@ export default forwardRef(function Input(
                     value={value}
                     ref={input}
                     className={`bg-transparent border-0 focus:border-0 focus:ring-0 w-full`}
-                    autoComplete={autoComplete}
                     required={required}
                     onChange={(e) => handleChange(e)}
                     disabled={disabled}

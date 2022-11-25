@@ -20,6 +20,9 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
+        if(auth()->check()){
+            return redirect()->rote('home');
+        }
         session()->flash('action', 'login');
         return back();
     }

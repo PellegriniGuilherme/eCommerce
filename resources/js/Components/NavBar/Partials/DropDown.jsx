@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Transition } from '@headlessui/react';
 
-function DropDown({ open, close, children }) {
+function DropDown({ open, children, className }) {
 
     return (
         <Transition
@@ -15,11 +15,9 @@ function DropDown({ open, close, children }) {
             leaveTo="transform opacity-0 scale-95"
         >
             <div
-                className={`absolute z-50 rounded-md shadow-lg bg-zinc-50 top-full left-2 w-full mt-1`}
+                className={`absolute z-50 rounded-md shadow-lg bg-zinc-50 top-full left-2 w-full mt-1 ${className}`}
             >
-                <div className={`flex flex-col gap-y-1 rounded-md ring-1 ring-black ring-opacity-5 py-1 text-zinc-800`}>
-                    {children}
-                </div>
+                {children}
             </div>
         </Transition>
     )

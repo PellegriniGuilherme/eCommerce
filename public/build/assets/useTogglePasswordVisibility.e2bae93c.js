@@ -1,1 +1,0 @@
-import{r as i}from"./app.235c1f47.js";const o=()=>{const[s,e]=i.exports.useState(!1),[r,t]=i.exports.useState("password");return{securityPassword:r,eye:s,handlePasswordVisibility:()=>{s===!1?(e(!0),t("text")):s===!0&&(e(!1),t("password"))}}},d=o;export{d as u};

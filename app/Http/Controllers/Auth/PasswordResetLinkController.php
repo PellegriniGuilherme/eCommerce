@@ -44,8 +44,7 @@ class PasswordResetLinkController extends Controller
         );
 
         if ($status == Password::RESET_LINK_SENT) {
-            session()->flash('message', __($status));
-            return back();
+            return redirect()->route('password.request')->with('status', __($status));
         }
 
         throw ValidationException::withMessages([
