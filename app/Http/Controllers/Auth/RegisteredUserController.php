@@ -40,7 +40,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'cpf' => ['required', 'cpf', 'unique:users,cpf'],
             'gender' => ['nullable', Rule::in(['M',"F","NB", "O"])],
-            'birthDate' => ['nullable', 'date'],
+            'birth_date' => ['nullable', 'date'],
             'cell' => ['required', 'min:10', 'max:11'],
             'cep' => ['required', 'size:8'],
             'endereco' => ['required', 'string'],
@@ -59,7 +59,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'cpf' => $request->cpf,
             'gender' => $request->gender,
-            'birthDate' => $request->birthDate,
+            'birth_date' => $request->birth_date,
             'cell' => $request->cell
         ]);
 

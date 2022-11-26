@@ -17,7 +17,7 @@ return new class extends Migration
         {
             $table->string('cpf')->after('password');
             $table->enum('gender', ['M', 'F', 'NB', 'O'])->nullable()->default(null)->after('cpf');
-            $table->date('birthDate')->nullable()->default(null)->after('gender');
+            $table->date('birth_date')->nullable()->default(null)->after('gender');
             $table->string('cell')->after('birthDate');
         });
     }
@@ -33,7 +33,7 @@ return new class extends Migration
         {
             $table->dropColumn('cpf');
             $table->dropColumn('gender');
-            $table->dropColumn('birthDate');
+            $table->dropColumn('birth_date');
             $table->dropColumn('cell');
         });
     }

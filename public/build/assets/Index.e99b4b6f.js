@@ -1,0 +1,1 @@
+import{a as t}from"./app.eb0f93be.js";import{A as o}from"./AdminLayout.e1618540.js";import"./SideModal.231c4ce1.js";import"./transition.d9e460cc.js";import"./index.esm.6c6f57be.js";function u(){return t(o,{title:"Produtos"})}export{u as default};

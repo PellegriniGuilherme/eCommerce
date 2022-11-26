@@ -21,14 +21,14 @@ function AdminLayout({ children, title }) {
     return (
         <div className="min-h-screen min-w-full flex flex-row bg-neutral-100">
             <Head title={title}/>
-            <nav className="hidden md:flex h-screen w-1/5 bg-zinc-200 flex-col sticky top-0">
+            <nav className="hidden md:flex h-screen w-1/5 bg-zinc-200 flex-col sticky top-0 border-r">
                 <Link href={route('home')} className="h-14 flex justify-center items-center mb-5">
                     <Logo className="w-3/4"/>
                 </Link>
                 <NavLinkDashboard mobile={false} />
             </nav>
             <div className="w-full h-full flex flex-col">
-                <nav className="h-14 w-full flex flex-row justify-start items-center bg-zinc-50 sticky top-0 px-5">
+                <nav className="h-14 w-full flex flex-row justify-start items-center bg-zinc-50 sticky top-0 px-5 border-b z-50">
                     <div className="flex md:hidden cursor-pointer" onClick={() => setMenuOpen(true)}>
                         <MdOutlineMenu size={30} />
                     </div>
@@ -54,7 +54,10 @@ function AdminLayout({ children, title }) {
                     </div>
                 </nav>
                 <main className="p-5">
-                    {children}
+                    <h1 className="font-bold text-2xl text-zinc-800 mb-5">{title}</h1>
+                    <div className="w-full h-full rounded-md shadow-md bg-zinc-50 p-5">
+                        {children}
+                    </div>
                 </main>
             </div>
             <SideModal closeable={false} show={menuOpen}>

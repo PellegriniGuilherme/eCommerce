@@ -108,13 +108,13 @@ class ProfileController extends Controller
         $request->validate([
             'cpf' => ['nullable', 'cpf', Rule::unique(User::class, 'cpf')->ignore($user->id)],
             'gender' => ['nullable', Rule::in(['M',"F","NB", "O"])],
-            'birthDate' => ['nullable', 'date'],
+            'birth_date' => ['nullable', 'date'],
             'cell' => ['nullable', 'min:10', 'max:11']
         ]);
 
         $user->cpf = $request->cpf ? $request->cpf : $user->cpf;
         $user->gender = $request->gender ? $request->gender : $user->gender;
-        $user->birthDate = $request->birthDate ? $request->birthDate : $user->birthDate;
+        $user->birth_date = $request->birth_date ? $request->birth_date : $user->birth_date;
         $user->cell = $request->cell ? $request->cell : $user->cell;
         $user->save();
 

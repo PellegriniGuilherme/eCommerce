@@ -18,7 +18,7 @@ export default function Register() {
         name: '',
         cpf: '',
         gender: '',
-        birthDate: '',
+        birth_date: '',
         cell: '',
         cep: '',
         endereco: '',
@@ -191,11 +191,11 @@ export default function Register() {
                     <Input
                         type="date"
                         label="Data de nascimento"
-                        name="birthDate"
-                        value={data.birthDate}
-                        autoComplete="birthDate"
+                        name="birth_date"
+                        value={data.birth_date}
+                        autoComplete="birth_date"
                         handleChange={onHandleChange}
-                        error={errors.birthDate}
+                        error={errors.birth_date}
                     />
                     <MaskInput
                         type="text"

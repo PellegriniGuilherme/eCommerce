@@ -12,7 +12,7 @@ function PersonalData({ user }) {
         name: user.name,
         cpf: user.cpf,
         gender: user.gender ? user.gender : '',
-        birthDate: user.birthDate ? user.birthDate : '',
+        birth_date: user.birth_date ? user.birth_date : '',
         cell: user.cell,
     });
 
@@ -73,11 +73,11 @@ function PersonalData({ user }) {
                 <Input
                     type="date"
                     label="Data de nascimento"
-                    name="birthDate"
-                    value={data.birthDate}
-                    autoComplete="birthDate"
+                    name="birth_date"
+                    value={data.birth_date}
+                    autoComplete="birth_date"
                     handleChange={onHandleChange}
-                    error={errors.birthDate}
+                    error={errors.birth_date}
                 />
                 <MaskInput
                     type="text"
