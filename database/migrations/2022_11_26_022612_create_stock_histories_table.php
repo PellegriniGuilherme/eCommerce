@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\Category;
+use App\Models\Grid;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,13 +15,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('stock_histories', function (Blueprint $table) {
             $table->id();
-            $table->string('slug');
-            $table->string('name');
-            $table->string('description');
-            $table->foreignIdFor(Category::class)->references('id')->on('categories');
-            $table->foreignIdFor(SubCategory::class)->references('id')->on('sub_categories');
+            $table->foreignIdFor(Grid::class)->references('id')->on('grids');
+            $table->foreignIdFor(User::class)->references('id')->on('users');
+            $table->integer('stock_movement');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('stock_histories');
     }
 };

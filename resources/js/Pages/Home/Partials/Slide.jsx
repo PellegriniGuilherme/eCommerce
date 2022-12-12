@@ -78,19 +78,19 @@ function Slide() {
                 <Navigation navigatorShow={navigator}/>
                 <SwiperSlide>
                     <img
-                        src="https://s.mlcdn.com.br/banner/campanhas/0311_ADS_LargeDesk_TCLCopa_211.png"
+                        src="https://s.mlcdn.com.br/banner/campanhas/0112largedeskbrinquedosate70offv2.png"
                         className="w-full h-auto"
                     />
                 </SwiperSlide>
                 <SwiperSlide>
                     <img
-                        src="https://s.mlcdn.com.br/banner/campanhas/1711largedeskframedinamico6.png"
+                        src="https://s.mlcdn.com.br/banner/campanhas/0112largedeskbrinquedosate70offv2.png"
                         className="w-full h-auto"
                     />
                 </SwiperSlide>
                 <SwiperSlide>
                     <img
-                        src="https://s.mlcdn.com.br/banner/campanhas/2810largedeskfertasdatvblackcopa.png"
+                        src="https://s.mlcdn.com.br/banner/campanhas/0112largedeskbrinquedosate70offv2.png"
                         className="w-full h-auto"
                     />
                 </SwiperSlide>

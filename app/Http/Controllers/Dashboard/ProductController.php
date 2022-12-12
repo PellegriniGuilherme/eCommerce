@@ -20,7 +20,7 @@ class ProductController extends Controller
             if($request->barCode){
                 $query->where('barcode', $request->barCode);
             }
-        })->paginate(20)->withQueryString();
+        })->with('grids')->paginate(20)->withQueryString();
 
         return Inertia::render('Dashboard/Pages/Product/Index',[
             'products' => $products
